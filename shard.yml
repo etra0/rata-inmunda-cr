@@ -1,0 +1,24 @@
+name: rata-inmunda-reborn-v3
+version: 0.1.0
+
+authors:
+  - Sebastián Aedo <sebastian.aedo29@gmail.com>
+
+targets:
+  rata-inmunda-reborn-v3:
+    main: src/rata-inmunda.cr
+
+dependencies:
+  tourmaline:
+    github: protoncr/tourmaline
+    branch: master
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    version: ~> 1.0.0
+  lexbor:
+    github: etra0/lexbor
+    branch: fix-linking
+
+crystal: 1.7.2
+
+license: MIT

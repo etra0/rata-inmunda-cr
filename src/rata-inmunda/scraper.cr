@@ -9,11 +9,21 @@ module RataInmunda
   class Scraper
     getter url
 
-    def initialize(@url : String)
+    def initialize(url : String)
+      @url = URI.parse url
     end
 
     def initialize(obj : JSON::PullParser)
-      @url = obj.read_string
+      @url = URI.parse obj.read_string
+    end
+
+    def build_url(href : String) : String
+      String::Builder.build do |builder|
+        builder << @url.scheme
+        builder << "://"
+        builder << @url.host
+        builder << href
+      end
     end
 
     def poll : Array(Entry)?
@@ -38,7 +48,7 @@ module RataInmunda
         id = entry.["href"]?.not_nil!.strip("/").split(".")[-1].to_i
         entry = Entry.new(
           entry.inner_text,
-          entry.["href"]?.not_nil!,
+          build_url(entry.["href"]?.not_nil!),
           id
         )
 

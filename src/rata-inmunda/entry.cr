@@ -1,5 +1,7 @@
 module RataInmunda
   class Entry
+    include JSON::Serializable
+
     getter id
     def initialize(@title : String, @url : String, @id : Int32)
     end

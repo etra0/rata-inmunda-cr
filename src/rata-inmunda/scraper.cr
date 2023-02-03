@@ -16,7 +16,7 @@ module RataInmunda
       @url = obj.read_string
     end
 
-    def poll : Array(Entries::Entry)?
+    def poll : Array(Entry)?
       # Ugly hack for windows, sadly.
       if {{ flag?(:win32) }}
         ssl_context = OpenSSL::SSL::Context::Client.new
@@ -32,7 +32,7 @@ module RataInmunda
 
       parser = Lexbor::Parser.new(response.body)
 
-      entries = [] of Entries::Entry
+      entries = [] of Entry
       selector = ".structItem-cell.structItem-cell--main > div.structItem-title a:not(.labelLink)"
       parser.css(selector).each do |entry|
         entry = Entries::Entry.new(

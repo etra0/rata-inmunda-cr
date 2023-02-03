@@ -1,4 +1,4 @@
-module RataInmunda::Entries
+module RataInmunda
   class Entry
     def initialize(@title : String, @url : String, @id : Int32)
     end

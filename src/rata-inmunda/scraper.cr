@@ -35,10 +35,11 @@ module RataInmunda
       entries = [] of Entry
       selector = ".structItem-cell.structItem-cell--main > div.structItem-title a:not(.labelLink)"
       parser.css(selector).each do |entry|
-        entry = Entries::Entry.new(
+        id = entry.["href"]?.not_nil!.strip("/").split(".")[-1].to_i
+        entry = Entry.new(
           entry.inner_text,
           entry.["href"]?.not_nil!,
-          1234, # TODO: Actually parse the ID.
+          id
         )
 
         entries << entry

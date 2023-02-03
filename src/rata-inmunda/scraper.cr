@@ -75,6 +75,12 @@ module RataInmunda
       end
     end
 
+    def poll
+      all_entries = Array(Entry).new
+      @scrapers.each { |s| all_entries.concat(s.poll.not_nil!) }
+      return all_entries
+    end
+
     # This function returns if the file was updated.
     def update_scraper : Bool
       unless File.exists?(@filename)

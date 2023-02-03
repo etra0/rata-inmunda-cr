@@ -61,7 +61,7 @@ module RataInmunda
 
     # This function parses the file and loads the scraper list. It also
     # updates the current hash
-    def parse_scrapers
+    private def parse_scrapers
       unless File.exists?(@filename)
         raise Exception.new("Please create the scraper file")
       end

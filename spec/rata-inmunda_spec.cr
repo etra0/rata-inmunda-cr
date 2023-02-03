@@ -1,6 +1,14 @@
 require "./spec_helper"
 
 describe RataInmunda do
+  it "checks entries are different" do
+    a = RataInmunda::Entry.new("foo", "bar", 1234)
+    b = RataInmunda::Entry.new("foo", "bar", 1234)
+    c = RataInmunda::Entry.new("foo", "bar", 1235)
+
+    set = Set.new [a, b, c]
+    set.size.should eq(2)
+  end
   it "updates the scrapers correctly" do
     scrapers_file = File.tempfile("scraper") do |file|
       file.print("[\"google.cl\", \"twitter.com\"]")
